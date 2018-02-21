@@ -90,12 +90,17 @@ model.compile(loss=keras.losses.categorical_crossentropy,
               optimizer=keras.optimizers.Adadelta(),
               metrics=['accuracy'])
 
+tbCallBack = keras.callbacks.TensorBoard(log_dir='./Graph2', histogram_freq=0, write_graph=True, write_images=True)
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
+
 # 开始培训/优化模型，设置跑12次迭代， 每个迭代跑128个样本
 model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
           verbose=1,
-          validation_data=(x_test, y_test))
+          validation_data=(x_test, y_test),
+          callbacks=[tbCallBack])
 
 # 用测试数据看看预测的精度是多少？
 score = model.evaluate(x_test, y_test, verbose=0)

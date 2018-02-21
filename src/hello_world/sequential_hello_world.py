@@ -4,28 +4,22 @@ from keras.layers import Dense
 import matplotlib.pyplot as plt
 
 # generate data
-x = np.linspace(-1, 1, 200)
+x = np.linspace(-1, 1, 2000)
 np.random.shuffle(x)
-y = 0.5 * x + 2 + np.random.normal(0, 0.5, (200,))
-
-# print("print x")
-# print(x)
-# print("print y")
-# print(y)
+y = 0.5 * x + 2 + np.random.normal(0, 0.5, (2000,))
 
 # prepare test data and training data
-x_train, y_train = x[:160], y[:160]
-x_test, y_test = x[160:], y[160:]
+x_train, y_train = x[:1600], y[:1600]
+x_test, y_test = x[1600:], y[1600:]
 
 # setup network
 model = Sequential()
-# model.add(Dense(1, input_dim=1))
 model.add(Dense(1,input_dim=1))
-model.compile(loss='mse', optimizer='sgd')
+model.compile(loss='mse', optimizer="sgd")
 
 # training model
 print("Training")
-for step in range(301):
+for step in range(3001):
     cost = model.train_on_batch(x_train, y_train)
     if step % 100 == 0:
         print("training cost : ", cost)

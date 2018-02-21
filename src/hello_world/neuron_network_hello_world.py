@@ -18,12 +18,11 @@ simple_model.add(Dense(4, activation='relu', name='layer4'))
 simple_model.add(Dense(1, activation='sigmoid', name='layer5'))
 
 # set optimizer and loss function
-simple_model.compile(optimizer="sgd", loss="mse")
+simple_model.compile(optimizer="adam", loss="mse")
 
 # set training epochs
-simple_model.fit(x, y, epochs=2000)
+simple_model.fit(x, y, epochs=20000)
 
-print("result")
 result = simple_model.predict(x[1:2])
-print(result)
+print("result", result)
 
